@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 public class bonschecontroller {
+    //본회의 정보를 넘겨주는 본회의 컨트롤러
     private bonschamapper mapper;
 
     public bonschecontroller(bonschamapper mapper) {

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+//DB에서 본회의 정보를 읽어와 본회의 모델 객체에 맵핑
 @Mapper
 public interface bonschamapper {
 

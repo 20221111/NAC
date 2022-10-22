@@ -2,6 +2,7 @@ package com.example.nac.model;
 
 import lombok.*;
 
+//DB의 본회의 테이블에 멥핑되는 객체
 @Getter
 @Setter
 @NoArgsConstructor
