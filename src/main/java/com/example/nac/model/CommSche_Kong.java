@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class COMMSCHE_SMALL extends Scadule{
+public class CommSche_Kong extends Scadule{
     private String MEETING_DATE; //날자(2022-04-04)
     private String MEETING_TIME; //10:00
     private String TITLE; //제목

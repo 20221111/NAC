@@ -28,7 +28,11 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("국회 일정 어플리케이션 RESTful API")
-                .description("/calender/month/{date}은 아직 정상 실행 불가능")
+                .description("현재 달력 JSON 출력 API까지 개발\n" +
+                        "개발 예정\n" +
+                        "1. 날짜별 일정\n" +
+                        "2. 소팅기능(본회의, 정기회의, 기자회견)\n" +
+                        "3. 로그인\n")
                 .version("1.0.0")
                 .build();
     }
