@@ -1,6 +1,5 @@
 package com.example.nac.Mapper;
 
-import com.example.nac.model.Scadule;
 import com.example.nac.model.bonsche;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -26,9 +25,7 @@ public interface bonschamapper {
     List<bonsche> GetbonscheDate(@Param("date") String date);
 
     //해당 한달간의 본회의 스케줄을 전부 가져옴(입력 예시: 2022-01)
-    //문제 있음 실행 불가
-    //%를 붙이는게 문제가 되는걸로 보임
-    @Select("SELECT * FROM project2022.bonsche where MEETING_DATE like #{month}%;")
+    @Select("SELECT * FROM project2022.bonsche where MEETING_DATE like '%${month}%'")
     List<bonsche> GetbonscheMonth(@Param("month") String month);
 
     /* 여기부터 아래는 테스트 코드*/

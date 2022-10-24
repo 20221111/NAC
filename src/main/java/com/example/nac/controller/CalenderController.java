@@ -4,8 +4,10 @@ import com.example.nac.Mapper.bonschamapper;
 import com.example.nac.Mapper.commschemapper;
 import com.example.nac.model.Scadule;
 import com.example.nac.model.bonsche;
+import com.example.nac.model.commsche;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -13,7 +15,7 @@ import java.util.List;
 public class CalenderController {
     //달력 정보를 넘겨주는 달력 컨트롤러
 
-    private List<bonsche> scadules;
+    private ArrayList<Scadule> scadules;
     private bonschamapper bonmapper;
     private commschemapper commapper;
 
@@ -31,9 +33,11 @@ public class CalenderController {
 
     //날자를 알려주면 해당 한달간의 본회의 일정을 돌려줌
     @GetMapping("/month/{date}")
-    public List<bonsche> GetcommscheDate(@PathVariable("date") String date){
-        String month = date.substring(0, 7); //년도와 달로 자름
-        return bonmapper.GetbonscheMonth(month);
+    public List<Scadule> GetcommscheDate(@PathVariable("date") String date){
+        String month = date.substring(0, 7); //년도와 달로 자름 2022-09-28 -> 2022-09
+        scadules.addAll(bonmapper.GetbonscheMonth(month));
+        scadules.addAll(commapper.GetcommscheMonth(month));
+        return scadules;
     }
 
     /*@PutMapping("commsche/put/{TITLE}")
