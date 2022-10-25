@@ -28,11 +28,16 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("국회 일정 어플리케이션 RESTful API")
-                .description("현재 달력 JSON 출력 API까지 개발\n" +
-                        "개발 예정\n" +
-                        "1. 날짜별 일정\n" +
-                        "2. 소팅기능(본회의, 정기회의, 기자회견)\n" +
-                        "3. 로그인\n")
+                .description("구현된 API\n" +
+                        "1. /calender/date/{date} :date에 해당하는 날자의 일정을 전부 가져옴 [입력 데이터 예시: 2022-10-25]\n" +
+                        "2. /calender/month/{date} : date에 해당하는 날짜가 포함되는 월의 일정을 전부 가져옴[입력 데이터 예시: 2022-10-25]\n" +
+                        "\n" +
+                        "구현 예정 API\n" +
+                        "1. 로그인\n" +
+                        "\n" +
+                        "일정을 분류해서 표현할 수 있어야함(/calender/month로 가져온 JSON정보중에 분류된 정보만을 표현하고 안되면 연락할것)\n"+
+                        "분류 기준: 본회의, 위원회, 공청회, 국회의장, 국회부의장, 국회행사, 기자회견\n"+
+                        "추가적인 분류 기준: 영화, 세미나(해당 일정은 시계열 표현에 상이점이 있어 연구가 필요함)\n")
                 .version("1.0.0")
                 .build();
     }

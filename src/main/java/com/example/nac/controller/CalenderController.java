@@ -25,13 +25,19 @@ public class CalenderController {
     }
 
 
-    //날자를 알려주면 해당 날자의 본회의 일정을 돌려줌
+    //날자를 알려주면 해당 날자의 일정을 돌려줌
     @GetMapping("/date/{date}")
-    public List<bonsche> GetCalenderDate(@PathVariable("date") String date){
-        return bonmapper.GetbonscheDate(date);
+    public Map<String,Object> GetCalenderDate(@PathVariable("date") String date){
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("bonsche",bonmapper.GetbonscheDate(date));
+        map.put("commKong",commKongMapper.GetCommSche_KongDate(date)); //일반회의 - 공청회 정보
+        map.put("commMain",commMainMapper.GetCommSche_MainDate(date)); //일반회의 - 위원회
+        map.put("commSmall",commSmallMapper.GetCommSche_SmallDate(date)); //일반회의 - 위원회
+        return map;
     }
 
-    //날자를 알려주면 해당 한달간의 본회의 일정을 돌려줌
+    //날자를 알려주면 해당 한달간의 일정을 돌려줌
     @GetMapping("/month/{date}")
     public Map<String,Object> GetCalenderMonth(@PathVariable("date") String date){
         String month = date.substring(0, 7); //년도와 달로 자름 2022-09-28 -> 2022-09
@@ -42,7 +48,6 @@ public class CalenderController {
         map.put("commKong",commKongMapper.GetCommSche_KongMonth(month)); //일반회의 - 공청회 정보
         map.put("commMain",commMainMapper.GetCommSche_MainMonth(month)); //일반회의 - 위원회
         map.put("commSmall",commSmallMapper.GetCommSche_SmallMonth(month)); //일반회의 - 위원회
-        //map.put("commsche",commapper.GetcommscheMonth(month));
         return map;
     }
 
