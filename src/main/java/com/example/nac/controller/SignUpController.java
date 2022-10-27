@@ -34,7 +34,7 @@ public class SignUpController {
                        @RequestParam("password") String password, @RequestParam("name") String name,
                           @RequestParam("security") String security)
     {
-        if((id == null) || (email == null) && (password == null) && (name == null) && (security == null))
+        if((id == null) || (email == null) || (password == null) || (name == null) || (security == null))
         {
             return 1;
         }
@@ -47,11 +47,8 @@ public class SignUpController {
             else
             {
                 joinusmapper.SignUp(id,email,password,name,security);
-                return 3;
+                return 0;
             }
         }
-
-
-
     }
 }

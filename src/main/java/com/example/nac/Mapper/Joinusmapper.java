@@ -20,9 +20,20 @@ public interface Joinusmapper {
     @Select("Select count(*) as cn from JOINUS where EMAIL=#{EMAIL}")
     boolean ExistsEmail(@Param("EMAIL") String EMAIL);
 
+    @Select("Select PASSWORD from JOINUS where id=#{id}")
+    String LoginPassword(@Param("id") String id);
+
+    @Select("Select ID from JOINUS where name=#{name} and email=#{email} ")
+    String FindID(@Param("name") String name, @Param("email") String email);
+
+    @Select("Select count(*) as cn from JOINUS where ID=#{ID} and SECURITY=#{SECURITY} ")
+    boolean FindPasswordcheck(@Param("ID") String ID, @Param("SECURITY") String SECURITY);
+
+    @Select("Select PASSWORD from JOINUS where ID=#{ID} and SECURITY=#{SECURITY} ")
+    String FindPassword(@Param("ID") String ID, @Param("SECURITY") String SECURITY);
+
     /*-------------------------- Insert --------------------------*/
     //로그인정보 저장
-    //아직 작동안함
     @Insert("INSERT INTO project2022.JOINUS " +
             "(ID, EMAIL, PASSWORD, NAME, SECURITY) " +
             "VALUES (#{ID}, #{EMAIL}, #{PASSWORD}, #{NAME}, #{SECURITY});")
@@ -31,5 +42,10 @@ public interface Joinusmapper {
                 @Param("PASSWORD") String PASSWORD,
                 @Param("NAME") String NAME,
                 @Param("SECURITY") String SECURITY);
+    
+    //개인정보 수정
+    @Insert("UPDATE project2022.JOINUS SET PASSWORD = #{PASSWORD} WHERE (ID = #{ID});")
+    boolean ChangePassword(@Param("ID") String ID,
+                   @Param("PASSWORD") String PASSWORD);
 
 }
