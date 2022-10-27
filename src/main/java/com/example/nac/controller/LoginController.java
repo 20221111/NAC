@@ -19,9 +19,11 @@ public class LoginController {
     {
         if(!((id == null) || (password == null))) // 입력오류 ErrCode 1
         {
-            if (!joinusmapper.ExistsID(id) || password.equals(joinusmapper.LoginPassword(id))) // 존재하지 않는 ID 또는 ID Password 불일치 ErrCode 2
+            if (joinusmapper.ExistsID(id)) // 존재하지 않는 ID 또는 ID Password 불일치 ErrCode 2
             {
-                return 0;// 정상 로그인
+                if (password.equals(joinusmapper.LoginPassword(id)))
+                {return 0;}// 정상 로그인
+                else{return 2;}
             }
             else{return 2;}
         }
