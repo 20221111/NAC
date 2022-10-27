@@ -34,8 +34,8 @@ public class SwaggerConfiguration {
                         "3. /SignUp/{id}: id를 사용해서 회원가입(자동으로 아이디/이메일 검사) 0: 정상입력 Errcode 1: 잘못된 입력, 2: 이미 있는 아이디/이메일\n" +
                         "4. /SignUp/isId/{id}: 해당 id로 가입한 이력이 있는지 확인\n" +
                         "5. /SignUp/isEmail/{email}: 해당 email로 가입한 이력이 있는지 확인\n" +
-                        "6. /Login/{id}: id를 사용해서 로그인 0: 정상입력 Errcode 1: 잘못된 입력, 2:존재하지 않는 ID ,3: ID, 비밀번호 불일치\n" +
-                        "7. /Login/findid/{name}: name,email을 사용해서 ID를 찾음" +
+                        "6. /Login/{id}: id를 사용해서 로그인 0: 정상입력 Errcode 1: 잘못된 입력, 2:존재하지 않는 ID 또는 ID, 비밀번호 불일치\n" +
+                        "7. /Login/findid/{name}: name,email을 사용해서 ID를 찾음\n" +
                         "8. /Login/findpassword/{id}: id,security를 사용해서 렌덤한 비밀번호를 새로 부여받음\n" +
                         "\n" +
                         "\n" +

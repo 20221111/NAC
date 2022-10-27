@@ -18,12 +18,10 @@ public class LoginController {
     public int SignUp(@PathVariable("id") String id, @RequestParam("password") String password)
     {
         if(!((id == null) || (password == null))) // 입력오류 ErrCode 1
-        {if (joinusmapper.ExistsID(id)) // 존재하지 않는 ID ErrCode 2
-            {if (password.equals(joinusmapper.LoginPassword(id)))// ID Password 불일치 ErrCode 3
-                {
-                    return 0;// 정상 로그인
-                }
-                else {return 3;}
+        {
+            if (!joinusmapper.ExistsID(id) || password.equals(joinusmapper.LoginPassword(id))) // 존재하지 않는 ID 또는 ID Password 불일치 ErrCode 2
+            {
+                return 0;// 정상 로그인
             }
             else{return 2;}
         }
@@ -33,7 +31,12 @@ public class LoginController {
     @PostMapping("/findid/{name}")
     public String findid(@PathVariable("name") String name, @RequestParam("email") String email)
     {
-        return joinusmapper.FindID(name,email);
+        String temp = joinusmapper.FindID(name,email);
+        if (temp ==null)
+        {
+            return "false";
+        }
+        return temp;
     }
     @PostMapping("/findpassword/{id}")
     public String findpassword(@PathVariable("id") String id, @RequestParam("security") String security)
