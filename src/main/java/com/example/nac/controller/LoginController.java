@@ -3,12 +3,16 @@ package com.example.nac.controller;
 import com.example.nac.Mapper.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 @RestController
 @RequestMapping(value = "/Login")
 public class LoginController {
     private Joinusmapper joinusmapper;
+
+    Map<String,Object> err = new HashMap<>();
 
     public LoginController(Joinusmapper joinusmapper) {
         this.joinusmapper = joinusmapper;
@@ -31,17 +35,19 @@ public class LoginController {
     }
 
     @PostMapping("/findid/{name}")
-    public String findid(@PathVariable("name") String name, @RequestParam("email") String email)
+    public Map<String,Object> findid(@PathVariable("name") String name, @RequestParam("email") String email)
     {
-        String temp = joinusmapper.FindID(name,email);
-        if (temp ==null)
+        Map<String,Object> map = new HashMap<>();
+        map.put("id", joinusmapper.FindID(name,email));
+        if (map.get("id") == null)
         {
-            return "false";
+            err.put("err","이름 또는 이메일 오류");
+            return err;
         }
-        return temp;
+        return map;
     }
     @PostMapping("/findpassword/{id}")
-    public String findpassword(@PathVariable("id") String id, @RequestParam("security") String security)
+    public Map<String,Object> findpassword(@PathVariable("id") String id, @RequestParam("security") String security)
     {
         if (joinusmapper.FindPasswordcheck(id,security))
         {
@@ -50,9 +56,17 @@ public class LoginController {
                     limit(10).
                     collect(StringBuilder::new, StringBuilder::appendCodePoint,StringBuilder::append).toString();
             joinusmapper.ChangePassword(id,temp);
-            return joinusmapper.FindPassword(id,security);
+
+            Map<String,Object> map = new HashMap<>();
+            map.put("id", joinusmapper.FindPassword(id,security));
+            return map;
         }
-        else return "false";
+        else
+        {
+            err.put("err","id 또는 보안질문 오류");
+            return err;
+        }
+
     }
 
 }
