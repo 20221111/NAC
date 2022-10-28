@@ -1,10 +1,7 @@
 package com.example.nac.Mapper;
 
 import com.example.nac.model.bonsche;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -42,10 +39,24 @@ public interface Joinusmapper {
                 @Param("PASSWORD") String PASSWORD,
                 @Param("NAME") String NAME,
                 @Param("SECURITY") String SECURITY);
-    
+
+    /*-------------------------- Update --------------------------*/
     //개인정보 수정
-    @Insert("UPDATE project2022.JOINUS SET PASSWORD = #{PASSWORD} WHERE (ID = #{ID});")
+    //비밀번호를 수정
+    @Update("UPDATE project2022.JOINUS SET PASSWORD = #{PASSWORD} WHERE (ID = #{ID});")
     boolean ChangePassword(@Param("ID") String ID,
-                   @Param("PASSWORD") String PASSWORD);
+                           @Param("PASSWORD") String PASSWORD);
+    //ID를 수정
+    @Update("UPDATE project2022.JOINUS SET ID = #{ID} WHERE (ID = #{curid});")
+    boolean ChangeId(@Param("ID") String ID,@Param("curid") String curid);
+
+    @Update("UPDATE project2022.JOINUS SET ID = #{ID}, EMAIL = #{EMAIL}, PASSWORD = #{PASSWORD}, NAME = #{NAME} WHERE (ID = #{curid});")
+    boolean changeAccount(@Param("curid") String curid,
+                          @Param("ID") String ID,
+                          @Param("EMAIL") String EMAIL,
+                          @Param("PASSWORD") String PASSWORD,
+                          @Param("NAME") String NAME,
+                          @Param("SECURITY") String SECURITY);
+
 
 }
