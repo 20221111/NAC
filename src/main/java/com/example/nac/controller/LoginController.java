@@ -11,9 +11,6 @@ import java.util.Random;
 @RequestMapping(value = "/Login")
 public class LoginController {
     private Joinusmapper joinusmapper;
-
-    Map<String,Object> err = new HashMap<>();
-
     public LoginController(Joinusmapper joinusmapper) {
         this.joinusmapper = joinusmapper;
     }
@@ -41,6 +38,7 @@ public class LoginController {
         map.put("id", joinusmapper.FindID(name,email));
         if (map.get("id") == null)
         {
+            Map<String,Object> err = new HashMap<>();
             err.put("err","이름 또는 이메일 오류");
             return err;
         }
@@ -63,6 +61,7 @@ public class LoginController {
         }
         else
         {
+            Map<String,Object> err = new HashMap<>();
             err.put("err","id 또는 보안질문 오류");
             return err;
         }
