@@ -35,22 +35,19 @@ public class AccountController {
     }
 
     @PostMapping("/changeAccount/{curid}")
-    public int changeAccount(@PathVariable("curid") String curid, @RequestParam("curpassword") String curpassword,
-                             @RequestParam("id") String id, @RequestParam("email") String email,
-                             @RequestParam("password") String password, @RequestParam("name") String name,
+    public int changeAccount(@PathVariable("id") String id,
+                             @RequestParam("email") String email,
+                             @RequestParam("name") String name,
                              @RequestParam("security") String security)
     {
-        if((id == null) || (email == null) || (password == null) || (name == null) || (security == null))
+        if((id == null) || (email == null) ||  (name == null) || (security == null))
         {
             return 1;
         }
         else
         {
-            if (curpassword.equals(joinusmapper.LoginPassword(curid))) {
-                joinusmapper.changeAccount(curid,id, email, password, name, security);
-                return 0;
-            }
-            return 1;
+            joinusmapper.changeAccount(id, email, name, security);
+            return 0;
         }
     }
 
