@@ -1,6 +1,6 @@
 package com.example.nac.controller;
 
-import com.example.nac.Mapper.*;
+import com.example.nac.Mapper.Joinusmapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;

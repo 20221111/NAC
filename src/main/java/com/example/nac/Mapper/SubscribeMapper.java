@@ -23,6 +23,9 @@ public interface SubscribeMapper {
 
 
     @Select("SELECT * FROM project2022.SUBSCRIBE where ID like '%${id}%'")
-    List<SUBSCRIBE> showSubscribe(@Param("id") String id);
+    List<SUBSCRIBE> GetSubscribe(@Param("id") String id);
+
+    @Select("SELECT * FROM project2022.SUBSCRIBE where DATE like '%${date}%' and ID like #{id};")
+    List<MEMO> GetSubscribeDate(@Param("date") String date, @Param("id") String id);
 
 }

@@ -1,7 +1,6 @@
 package com.example.nac.controller;
 
 import com.example.nac.Mapper.Joinusmapper;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

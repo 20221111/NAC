@@ -13,7 +13,7 @@ import lombok.Setter;
 public class MEMO {
     private String num;
     private String ID;
-    private String TITLE;
+    private String DATE;
     private String Contents;
 
 }

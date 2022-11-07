@@ -1,37 +1,34 @@
 package com.example.nac.controller;
 
 import com.example.nac.Mapper.Joinusmapper;
-import com.example.nac.Mapper.SubscribeMapper;
-import com.example.nac.model.SUBSCRIBE;
+import com.example.nac.Mapper.Memomapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/subscribe")
-public class SubscribeController {
-    private SubscribeMapper subscribeMapper;
+@RequestMapping(value = "/Memo")
+public class MemoController {
+    private Memomapper memomapper;
     private Joinusmapper joinusmapper;
 
     Map<String,Object> err = new HashMap<>();
 
-    public SubscribeController(SubscribeMapper subscribeMapper, Joinusmapper joinusmapper) {
-        this.subscribeMapper = subscribeMapper;
+    public MemoController(Memomapper memomapper, Joinusmapper joinusmapper) {
+        this.memomapper = memomapper;
         this.joinusmapper = joinusmapper;
     }
 
-    @PostMapping("push/{type}")
-    public Map<String,Object> push(@PathVariable("type") String type,
-                                   @RequestParam("id") String id,
-                                   @RequestParam("date") String date,
-                                   @RequestParam("title") String title)
+    @PostMapping("push/{id}")
+    public Map<String,Object> push(@PathVariable("id") String id,
+                                   @RequestParam("Contents") String Contents,
+                                   @RequestParam("date") String date)
     {
         Map<String,Object> temp = new HashMap<>();
         if (joinusmapper.ExistsID(id))
         {
-            subscribeMapper.PushSubscribe(type,id,date,title);
+            memomapper.PushMemo(id,Contents,date);
             temp.put("0","입력성공");
             return temp;
         }
@@ -43,8 +40,8 @@ public class SubscribeController {
     public Map<String,Object> pop(@PathVariable("num") String num)
     {
         Map<String, Object> temp = new HashMap<>();
-        if (subscribeMapper.PopSubscribe(num)) {
-            temp.put("0", "입력성공");
+        if (memomapper.PopMemo(num)) {
+            temp.put("0", "삭제성공");
             return temp;
         }
         temp.put("err","존재하지 않는 ID");
@@ -52,14 +49,16 @@ public class SubscribeController {
     }
 
     @PostMapping("Show/{id}")
-    public List<SUBSCRIBE> Show(@PathVariable("id") String id) {
-        return subscribeMapper.GetSubscribe(id);
+    public Map<String,Object> Show(@PathVariable("id") String id) {
+        Map<String, Object> temp = new HashMap<>();
+        temp.put("MEMO", memomapper.GetMemo(id));
+        return temp;
     }
 
     @PostMapping("Show/date/{id}")
     public Map<String,Object> Show(@PathVariable("id") String id,@RequestParam("date") String date) {
         Map<String, Object> temp = new HashMap<>();
-        temp.put("subscribe", subscribeMapper.GetSubscribeDate(date,id));
+        temp.put("MEMO", memomapper.GetMemoDate(date,id));
         return temp;
     }
 

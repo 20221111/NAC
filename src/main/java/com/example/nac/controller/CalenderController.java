@@ -1,7 +1,7 @@
 package com.example.nac.controller;
 
 import com.example.nac.Mapper.*;
-import com.example.nac.model.bonsche;
+import com.example.nac.Mapper.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
