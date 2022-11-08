@@ -34,7 +34,7 @@ public class AccountController {
         return 1;
     }
 
-    @PostMapping("/changeAccount/{curid}")
+    @PostMapping("/changeAccount/{id}")
     public int changeAccount(@PathVariable("id") String id,
                              @RequestParam("email") String email,
                              @RequestParam("name") String name,

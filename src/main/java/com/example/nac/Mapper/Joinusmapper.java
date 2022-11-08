@@ -50,7 +50,7 @@ public interface Joinusmapper {
     @Update("UPDATE project2022.JOINUS SET ID = #{ID} WHERE (ID = #{curid});")
     boolean ChangeId(@Param("ID") String ID,@Param("curid") String curid);
 
-    @Update("UPDATE project2022.JOINUS SET EMAIL = #{EMAIL}, NAME = #{NAME} SECURITY = #{SECURITY} WHERE (ID = #{ID});")
+    @Update("UPDATE project2022.JOINUS SET EMAIL = #{EMAIL}, NAME = #{NAME}, SECURITY = #{SECURITY} WHERE ID = #{ID};")
     boolean changeAccount(@Param("ID") String ID,
                           @Param("EMAIL") String EMAIL,
                           @Param("NAME") String NAME,
