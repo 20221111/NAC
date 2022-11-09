@@ -1,6 +1,7 @@
 package com.example.nac.Mapper;
 
 import com.example.nac.model.CommSche_Kong;
+import com.example.nac.model.bonsche;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,4 +17,7 @@ public interface CommKongMapper {
 
     @Select("SELECT * FROM project2022.COMMSCHE_KONG where MEETING_DATE like '%${month}%'")
     List<CommSche_Kong> GetCommSche_KongMonth(@Param("month") String month);
+
+    @Select("SELECT * FROM project2022.COMMSCHE_KONG where TITLE like '%${title}%'")
+    List<bonsche> SearchCommSche_KongTitle(@Param("title") String title);
 }

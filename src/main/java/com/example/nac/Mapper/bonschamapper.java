@@ -18,4 +18,7 @@ public interface bonschamapper {
     //해당 한달간의 본회의 스케줄을 전부 가져옴(입력 예시: 2022-01)
     @Select("SELECT * FROM project2022.bonsche where MEETING_DATE like '%${month}%'")
     List<bonsche> GetbonscheMonth(@Param("month") String month);
+
+    @Select("SELECT * FROM project2022.bonsche where TITLE like '%${title}%'")
+    List<bonsche> SearchbonscheTitle(@Param("title") String title);
 }
