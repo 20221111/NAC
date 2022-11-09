@@ -1,14 +1,17 @@
 package com.example.nac.controller;
 
 import com.example.nac.Mapper.*;
-import com.example.nac.Mapper.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/calender")
-public class CalenderController {
+@RequestMapping(value = "/Search")
+public class ScheduleSearchController {
     //달력 정보를 넘겨주는 달력 컨트롤러
     private bonschamapper bonmapper;
     private commschemapper commapper;
@@ -17,9 +20,9 @@ public class CalenderController {
     private CommSmallMapper commSmallMapper;
     private SeminarMapper seminarMapper;
 
-    public CalenderController(bonschamapper bonmapper, commschemapper commapper,
-                              CommKongMapper commKongMapper, CommMainMapper commMainMapper,
-                              CommSmallMapper commSmallMapper, SeminarMapper seminarMapper) {
+    public ScheduleSearchController(bonschamapper bonmapper, commschemapper commapper,
+                                    CommKongMapper commKongMapper, CommMainMapper commMainMapper,
+                                    CommSmallMapper commSmallMapper, SeminarMapper seminarMapper) {
         this.bonmapper = bonmapper;
         this.commapper = commapper;
         this.commKongMapper = commKongMapper;
@@ -28,7 +31,7 @@ public class CalenderController {
         this.seminarMapper = seminarMapper;
     }
 
-
+/*
     //날자를 알려주면 해당 날자의 일정을 돌려줌
     @GetMapping("/date/{date}")
     public Map<String,Object> GetCalenderDate(@PathVariable("date") String date){
@@ -56,10 +59,11 @@ public class CalenderController {
         map.put("seminar",seminarMapper.GetSeminarMonth(month)); //세미나
         return map;
     }
-
+*/
     /*@PutMapping("commsche/put/{TITLE}")
     public void putcommsche(@PathVariable("TITLE")String TITLE, @RequestParam("meetingsession") String meetingsession, @RequestParam("cha") String cha, @RequestParam("meeting_date") String meeting_time, @RequestParam("meeting_time") String meeting_date,@RequestParam("link_url") String link_url, @RequestParam("unit_cd") String unit_cd, @RequestParam("unit_nm") String unit_nm){
         mapper.Putcommsche(meetingsession, cha, TITLE, meeting_date, meeting_time, link_url, unit_cd, unit_nm);
     }*/
 
 }
+
