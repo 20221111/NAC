@@ -11,7 +11,7 @@ import java.util.List;
 public interface SubscribeMapper {
     @Insert("INSERT INTO project2022.SUBSCRIBE " +
             "(TYPE, ID, DATE, TITLE) " +
-            "VALUES (#{type}, #{id}, #{date}, #{title});")
+            "VALUES ('${type}', '${id}', '${date}', '${title}');")
     boolean PushSubscribe(
             @Param("type") String type,
             @Param("id") String id,
