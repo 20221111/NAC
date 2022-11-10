@@ -58,18 +58,28 @@ public class CalenderController {
         return map;
     }
 
-    @GetMapping("/month/{date}")
-    public List<String> GetCalenderfilter(@PathVariable("date") String date, @Param("type") List<String> type){
+    @GetMapping("/month/{date}/{type}")
+    public Map<String,Object> GetCalenderfilter(@PathVariable("date") String date, @PathVariable("type") String type){
         String month = date.substring(0, 7); //년도와 달로 자름 2022-09-28 -> 2022-09
-
-        //DB에서 가져온 Scadule객체 LIST를 MAP에 대입해 JSON형식으로 출력
+        String[] data_type = type.split(",");
         Map<String, Object> map = new HashMap<>();
-        map.put("bonsche",bonmapper.GetbonscheMonth(month));
-        map.put("commKong",commKongMapper.GetCommSche_KongMonth(month)); //일반회의 - 공청회 정보
-        map.put("commMain",commMainMapper.GetCommSche_MainMonth(month)); //일반회의 - 위원회
-        map.put("commSmall",commSmallMapper.GetCommSche_SmallMonth(month)); //일반회의 - 위원회
-        map.put("seminar",seminarMapper.GetSeminarMonth(month)); //세미나
-        return type;
+
+        for (String item: data_type)
+        {
+                switch (item){
+                    case "bonsche": map.put("bonsche",bonmapper.GetbonscheMonth(month));
+                        break;
+                    case "commKong": map.put("commKong",commKongMapper.GetCommSche_KongMonth(month)); //일반회의 - 공청회 정보
+                        break;
+                    case "commMain": map.put("commMain",commMainMapper.GetCommSche_MainMonth(month)); //일반회의 - 위원회
+                        break;
+                    case "commSmall": map.put("commSmall",commSmallMapper.GetCommSche_SmallMonth(month)); //일반회의 - 위원회
+                        break;
+                    case "seminar": map.put("seminar",seminarMapper.GetSeminarMonth(month)); //세미나
+                        break;
+                }
+        }
+        return map;
     }
 
     /*@PutMapping("commsche/put/{TITLE}")
