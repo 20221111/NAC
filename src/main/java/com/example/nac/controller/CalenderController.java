@@ -64,6 +64,12 @@ public class CalenderController {
         String[] data_type = type.split(",");
         Map<String, Object> map = new HashMap<>();
 
+        map.put("bonsche",null);
+        map.put("commKong",null);
+        map.put("commMain",null);
+        map.put("commSmall",null);
+        map.put("seminar",null);
+
         for (String item: data_type)
         {
                 switch (item){
